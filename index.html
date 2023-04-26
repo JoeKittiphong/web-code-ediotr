@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Code editor</title>
+</head>
+
+<body>
+    <div class="contianer">
+        <div class="input" id="input">
+            <label>HTML</label>
+            <textarea onkeyup="run()" id="html" cols="30" rows="10"></textarea>
+            <label>CSS</label>
+            <textarea onkeyup="run()" id="css" cols="30" rows="10"></textarea>
+            <label>Javascript</label>
+            <textarea onkeyup="run()" id="js" cols="30" rows="10"></textarea>
+        </div>
+        <div class="output" id="output">
+            <label for="">Result</label>
+            <iframe id="result"></iframe>
+        </div>
+    </div>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #222;
+            color: azure;
+        }
+
+        .contianer {
+            width: 100%;
+            height: 100vh;
+            padding: 20px;
+            display: flex;
+        }
+
+        .input,
+        .output {
+            flex-basis: 50%;
+            padding: 10px;
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        textarea {
+            width: 100%;
+            height: 30%;
+            padding: 10px 4px;
+            outline: none;
+            font-size: 16px;
+        }
+
+        iframe {
+            width: 100%;
+            height: 95%;
+            background: #ffffff;
+        }
+    </style>
+    <script>
+        const run = () => {
+            const html = document.querySelector('#html').value
+            const js = document.querySelector('#js').value
+            const css = document.querySelector('#css').value
+            const result = document.querySelector('#result')
+
+            result.contentDocument.body.innerHTML = `${html}<style>${css}</style>`
+            result.contentWindow.eval(js)
+        }
+    </script>
+</body>
+
+</html>
